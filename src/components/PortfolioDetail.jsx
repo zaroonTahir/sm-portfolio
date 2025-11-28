@@ -187,31 +187,37 @@ export default function PortfolioDetail() {
             />
           </div>
 
-          {/* Challenge & Solution */}
-          <div className="grid lg:grid-cols-2 gap-12 mb-20">
-            <div>
-              <h2 className="text-3xl font-bold mb-6 flex items-center space-x-3">
-                <span className="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-lg flex items-center justify-center text-cyan-400">
-                  <CheckCircle className="w-6 h-6" />
-                </span>
-                The Challenge
-              </h2>
-              <p className="text-lg text-slate-300 leading-relaxed">
-                {project.challenge}
-              </p>
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold mb-6 flex items-center space-x-3">
-                <span className="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-lg flex items-center justify-center text-cyan-400">
-                  <CheckCircle className="w-6 h-6" />
-                </span>
-                Our Solution
-              </h2>
-              <p className="text-lg text-slate-300 leading-relaxed">
-                {project.solution}
-              </p>
-            </div>
-          </div>
+        {/* Challenge & Solution */}
+<div className="grid lg:grid-cols-2 gap-12 mb-20">
+  <div>
+    <h2 className="text-3xl font-bold mb-6 flex items-center">
+      <span className="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 
+                      rounded-lg flex items-center justify-center text-cyan-400 mr-3">
+        <CheckCircle className="w-6 h-6" />
+      </span>
+      The Challenge
+    </h2>
+
+    <p className="text-lg text-slate-300 leading-relaxed">
+      {project.challenge}
+    </p>
+  </div>
+
+  <div>
+    <h2 className="text-3xl font-bold mb-6 flex items-center">
+      <span className="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 
+                      rounded-lg flex items-center justify-center text-cyan-400 mr-3">
+        <CheckCircle className="w-6 h-6" />
+      </span>
+      Our Solution
+    </h2>
+
+    <p className="text-lg text-slate-300 leading-relaxed">
+      {project.solution}
+    </p>
+  </div>
+</div>
+
 
           {/* Technologies */}
           <div className="mb-20">
