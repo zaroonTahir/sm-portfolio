@@ -10,11 +10,13 @@ import {
   ArrowRight,
   CheckCircle,
   Target,
+  Headphones,
 } from "lucide-react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 import seo from "../assets/seo.jpg";
 import software from "../assets/software.jpg";
 import ai from "../assets/ai.jpg";
+
 export default function Services() {
   const navigate = useNavigate();
   const [ref, isVisible] = useScrollAnimation({ once: true });
@@ -88,11 +90,18 @@ export default function Services() {
       features: ["Strategy Planning", "Market Analysis", "Growth Plans"],
       delay: 7,
     },
+    {
+      icon: <Headphones className="w-8 h-8" />,
+      title: "GHL Tech Support",
+      desc: "24/7 white-label tech support for your clients under your brand name.",
+      slug: "ghl-tech-support",
+      features: ["24/7 Support", "Zoom Call Support", "White-Label Service"],
+      delay: 8,
+    },
   ];
 
   const handleLearnMore = (slug) => {
     navigate(`/services/${slug}`);
-    // window.scrollTo(0, 0);
   };
 
   return (

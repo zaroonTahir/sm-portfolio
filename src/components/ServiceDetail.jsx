@@ -22,6 +22,7 @@ import Footer from "./Footer";
 import ai2 from "../assets/ai2.jpg";
 import seo2 from "../assets/seo2.webp";
 import ghl2 from "../assets/ghl2.webp";
+import ghltech from "../assets/ghltech.webp";
 
 export default function ServiceDetail() {
   const { serviceSlug } = useParams();
@@ -680,6 +681,75 @@ export default function ServiceDetail() {
         { value: "4.9/5", label: "User Satisfaction" },
       ],
     },
+ "ghl-tech-support": {
+  icon: <Shield className="w-12 h-12" />,
+  title: "GHL Tech Support",
+  subtitle: "Reliable Technical Support for GoHighLevel Users",
+  description:
+    "We provide dedicated GHL technical support including bug fixing, workflow troubleshooting, custom setups, and account optimization. Our team ensures your GoHighLevel system runs smoothly 24/7.",
+  heroImage:
+    ghltech,
+  features: [
+    "Troubleshooting Errors & Bugs",
+    "Fixing Automation Issues",
+    "GHL Workflow Optimization",
+    "Pipeline & CRM Fixes",
+    "Custom Integrations & API Setup",
+    "Email/SMS Delivery Issue Fixing",
+    "GHL Account Cleanup & Optimization",
+    "24/7 Technical Support Availability",
+  ],
+  benefits: [
+    {
+      icon: <Zap className="w-6 h-6" />,
+      title: "Fast Issue Resolution",
+      desc: "We fix critical issues quickly to avoid workflow breaks",
+    },
+    {
+      icon: <Shield className="w-6 h-6" />,
+      title: "Reliable Support",
+      desc: "Dependable technical assistance whenever you need it",
+    },
+    {
+      icon: <TrendingUp className="w-6 h-6" />,
+      title: "Boost Efficiency",
+      desc: "Optimize your GHL system for better performance",
+    },
+    {
+      icon: <Users className="w-6 h-6" />,
+      title: "Better Workflow Control",
+      desc: "Manage leads, automations, and pipelines without errors",
+    },
+  ],
+  process: [
+    {
+      step: "01",
+      title: "Assessment",
+      desc: "Identify issues and evaluate your GHL setup",
+    },
+    {
+      step: "02",
+      title: "Fix & Optimize",
+      desc: "Resolve errors and enhance automations",
+    },
+    {
+      step: "03",
+      title: "Testing",
+      desc: "Verify everything works smoothly",
+    },
+    {
+      step: "04",
+      title: "Support",
+      desc: "Provide ongoing technical support and monitoring",
+    },
+  ],
+  stats: [
+    { value: "300+", label: "Issues Fixed" },
+    { value: "24/7", label: "Support Available" },
+    { value: "99%", label: "Customer Satisfaction" },
+  ],
+},
+
   };
 
   const service = servicesData[serviceSlug];
