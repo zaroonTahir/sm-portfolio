@@ -100,7 +100,7 @@ export default function Navbar() {
             />
             <div className="flex flex-col">
               <span className="text-lg font-bold">SMJ Solutions</span>
-              <span className="text-xs text-cyan-400">Digital Innovation</span>
+              <span className="text-xs text-cyan-400">Strategic Media Journey</span>
             </div>
           </Link>
 

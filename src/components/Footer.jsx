@@ -53,7 +53,7 @@ export default function Footer() {
                 <div>
                   <span className="text-xl font-bold block">SMJ Solutions</span>
                   <span className="text-xs text-cyan-400">
-                    Digital Innovation
+                    Strategic Media Journey
                   </span>
                 </div>
               </div>
