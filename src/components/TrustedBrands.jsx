@@ -25,9 +25,9 @@ export default function TrustedBrands() {
   </h2>
 </div>
 
-        <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl p-12 border border-cyan-500/20 overflow-hidden">
+        <div className="relative  p-12  overflow-hidden">
           {/* Gradient overlay background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-pink-600/10 to-transparent opacity-50"></div>
+          <div className="absolute inset-0 "></div>
 
           {/* SINGLE ROW → moves RIGHT */}
           <div className="relative overflow-hidden">
