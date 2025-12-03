@@ -46,9 +46,9 @@ export default function Footer() {
                   <img
                     src={logo}
                     alt="SMJ Solutions Logo"
-                    className="w-14 h-14 object-contain"
+                    className="w-22 h-22 object-contain ml-6"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg blur-lg opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg blur-lg opacity-0  transition-opacity"></div>
                 </div>
                 <div>
                   <span className="text-xl font-bold block">SMJ Solutions</span>

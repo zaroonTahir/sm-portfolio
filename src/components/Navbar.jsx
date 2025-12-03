@@ -96,7 +96,7 @@ export default function Navbar() {
             <img
               src={logo}
               alt="SMJ Solutions Logo"
-              className="w-14 h-14 object-contain transform group-hover:scale-110 transition-transform"
+              className="w-13 h-13 object-contain transform group-hover:scale-110 transition-transform"
             />
             <div className="flex flex-col">
               <span className="text-lg font-bold">SMJ Solutions</span>
