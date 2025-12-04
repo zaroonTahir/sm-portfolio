@@ -35,30 +35,31 @@ export default function Footer() {
     <footer className="bg-slate-900/80 backdrop-blur-sm border-t border-slate-800 py-16 px-4 sm:px-6 lg:px-8 ">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
-          {/* Column 1: Company */}
-          <div>
-            <div className="flex items-center space-x-2 group ">
-              <div
-                className="space-y-6 animate-slide-up cursor-pointer"
-                onClick={() => handlePageClick("/")}
-              >
-                <div className="relative">
-                  <img
-                    src={logo}
-                    alt="SMJ Solutions Logo"
-                    className="w-22 h-22 object-contain ml-6"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg blur-lg opacity-0  transition-opacity"></div>
-                </div>
-                <div>
-                  <span className="text-xl font-bold block">SMJ Solutions</span>
-                  <span className="text-xs text-cyan-400">
-                    Strategic Media Journey
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Column 1: Company */}
+<div>
+  <div className="flex items-center space-x-2 group">
+    <div
+      className="animate-slide-up cursor-pointer"
+      onClick={() => handlePageClick("/")}
+    >
+      <div className="relative">
+        <img
+          src={logo}
+          alt="SMJ Solutions Logo"
+          className="w-22 h-22 ml-6 object-contain"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg blur-lg opacity-0 transition-opacity"></div>
+      </div>
+
+      <div className="mt-1">
+        <span className="text-xl font-bold block">SMJ Solutions</span>
+        <span className="text-xs text-cyan-400">
+          Strategic Media Journey
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 
           {/* Column 2: Services */}
           <div
