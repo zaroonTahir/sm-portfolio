@@ -406,7 +406,7 @@ export default function Contact() {
             <div className="space-y-6">
               <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl overflow-hidden h-96">
                 <iframe
-                  src=="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2747.9171320572445!2d51.544349675384765!3d25.286661077653505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDE3JzEyLjAiTiA1McKwMzInNDguOSJF!5e1!3m2!1sen!2s!4v1764847310286!5m2!1sen!2s"
+                  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2747.9171320572445!2d51.544349675384765!3d25.286661077653505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDE3JzEyLjAiTiA1McKwMzInNDguOSJF!5e1!3m2!1sen!2s!4v1764847310286!5m2!1sen!2s"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
