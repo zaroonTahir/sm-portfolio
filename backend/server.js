@@ -7,7 +7,9 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: "https://your-app.vercel.app", // allow only your frontend
+}));
 app.use(bodyParser.json());
 
 // Configure Gmail SMTP
