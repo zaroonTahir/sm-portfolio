@@ -4,10 +4,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import emailjs from "@emailjs/browser";
-
-// Initialize EmailJS
-emailjs.init("udznJym6zm12-dR5l");
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -40,16 +36,15 @@ export default function Contact() {
       icon: <MapPin className="w-10 h-10 text-cyan-400" />,
       title: "Visit Us",
       lines: [
-        <span className="flex items-center gap-3" key="pak">
+        <span key="pak" className="flex items-center gap-3">
           <img
             src="/flags/pakistan.png"
             className="w-8 h-5 object-cover rounded-sm border border-slate-700"
             alt="Pakistan Flag"
           />
-         Commerical 20, Khawaja Banglows, RYK, Pakistan
+          Commerical 20, Khawaja Banglows, RYK, Pakistan
         </span>,
-
-        <span className="flex items-center gap-3" key="dubai">
+        <span key="dubai" className="flex items-center gap-3">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_the_United_Arab_Emirates.svg"
             className="w-8 h-5 object-cover rounded-sm border border-slate-700"
@@ -57,8 +52,7 @@ export default function Contact() {
           />
           Khalidiyah Towers, Block A, Abu Dhabi, UAE
         </span>,
-
-        <span className="flex items-center gap-3" key="qatar">
+        <span key="qatar" className="flex items-center gap-3">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Qatar.svg"
             className="w-8 h-5 object-cover rounded-sm border border-slate-700"
@@ -68,19 +62,16 @@ export default function Contact() {
         </span>,
       ],
     },
-
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Call Us",
       lines: ["+97450445267", "+923216716065"],
     },
-
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email Us",
       lines: ["info@smjsols.com"],
     },
-
     {
       icon: <Clock className="w-6 h-6" />,
       title: "Working Hours",
@@ -110,7 +101,6 @@ export default function Contact() {
       return;
     }
 
-    // Simple email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast.error("Please enter a valid email address");
@@ -140,24 +130,36 @@ export default function Contact() {
     setLoading(true);
 
     try {
-      // Send email using EmailJS
-      const response = await emailjs.send(
-        "service_2thmr8d",
-        "template_1w0q6ss",
-        {
-          to_email: "info@smjsols.com",
-          from_name: formData.name,
-          from_email: formData.email,
-          phone: formData.phone || "Not provided",
+      // IMPORTANT: Replace with your deployed backend URL
+      // Local: http://localhost:5000
+      // Production: https://your-backend.railway.app or https://your-backend.render.com
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+
+      console.log("Sending to:", `${BACKEND_URL}/api/contact`);
+
+      const response = await fetch(`${BACKEND_URL}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
           service: formData.service,
           message: formData.message,
-          contact_method: formData.contactMethod,
-          budget: formData.budget || "Not specified",
-        }
-      );
+          contactMethod: formData.contactMethod,
+          budget: formData.budget,
+        }),
+      });
 
-      if (response.status === 200) {
-        toast.success("Message sent successfully! We'll get back to you soon.");
+      const data = await response.json();
+      console.log("Response:", data);
+
+      if (response.ok && data.success) {
+        toast.success(data.message || "Message sent successfully! We'll get back to you soon.");
+        // Reset form
         setFormData({
           name: "",
           email: "",
@@ -168,10 +170,12 @@ export default function Contact() {
           budget: "",
           agree: false,
         });
+      } else {
+        toast.error(data.message || "Failed to send message. Please try again.");
       }
-    } catch (err) {
-      console.error("Error sending email:", err);
-      toast.error("Failed to send message. Please try again later.");
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast.error("Network error. Please check if the backend server is running.");
     } finally {
       setLoading(false);
     }
@@ -203,7 +207,7 @@ export default function Contact() {
           style={{ animationDelay: "1s" }}
         ></div>
 
-        <div className="max-w-7xl mx-auto relative z-10 text-center">
+        <div className="max-w-7xl mx-auto text-center relative z-10">
           <span className="text-cyan-400 font-semibold tracking-wider text-sm">
             GET IN TOUCH
           </span>
@@ -217,9 +221,10 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Contact Info Cards */}
+      {/* Contact Info & Form */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
         <div className="max-w-7xl mx-auto">
+          {/* Contact Info Cards */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
             {contactInfo.map((item, i) => (
               <div
@@ -229,13 +234,11 @@ export default function Contact() {
                 <div className="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-lg flex items-center justify-center text-cyan-400 mb-4 group-hover:scale-110 transition-transform">
                   {item.icon}
                 </div>
-
                 <h3 className="text-lg font-bold mb-3 group-hover:text-cyan-400 transition-colors">
                   {item.title}
                 </h3>
-
                 {item.lines.map((line, j) => (
-                  <p key={j} className="text-slate-400 text-sm">
+                  <p key={j} className="text-slate-400 text-sm mb-2">
                     {line}
                   </p>
                 ))}
@@ -243,12 +246,10 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* Form + Map Section */}
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
-
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name + Email */}
                 <div className="grid md:grid-cols-2 gap-6">
@@ -265,7 +266,6 @@ export default function Contact() {
                       className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 text-white placeholder-slate-500"
                     />
                   </div>
-
                   <div>
                     <label className="block text-sm font-medium mb-2 text-slate-300">
                       Email *
@@ -296,7 +296,6 @@ export default function Contact() {
                       className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 text-white placeholder-slate-500"
                     />
                   </div>
-
                   <div>
                     <label className="block text-sm font-medium mb-2 text-slate-300">
                       Project *
@@ -404,6 +403,7 @@ export default function Contact() {
 
             {/* Map & Why Choose Us */}
             <div className="space-y-6">
+              {/* Google Map */}
               <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl overflow-hidden h-96">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2747.9171320572445!2d51.544349675384765!3d25.286661077653505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDE3JzEyLjAiTiA1McKwMzInNDguOSJF!5e1!3m2!1sen!2s!4v1764847310286!5m2!1sen!2s"
@@ -414,26 +414,45 @@ export default function Contact() {
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className="grayscale hover:grayscale-0 transition-all duration-500"
+                  title="Office Location"
                 ></iframe>
               </div>
 
+              {/* Why Choose Us */}
               <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-8">
-                <h3 className="text-2xl font-bold mb-6">Why Choose Us?</h3>
-
-                <ul className="space-y-4">
+                <h2 className="text-3xl font-bold mb-6">Why Choose Us?</h2>
+                <div className="space-y-4">
                   {[
-                    "Fast response time within 24 hours",
-                    "Expert team with 5+ years experience",
-                    "Customized solutions for your needs",
-                    "Transparent pricing with no hidden fees",
-                    "24/7 customer support available",
+                    {
+                      title: "Fast Response Time",
+                      desc: "We typically respond within 24 hours on business days.",
+                    },
+                    {
+                      title: "Expert Team",
+                      desc: "Our experienced professionals are ready to tackle your project.",
+                    },
+                    {
+                      title: "Quality Assured",
+                      desc: "We deliver high-quality solutions that exceed expectations.",
+                    },
+                    {
+                      title: "Transparent Pricing",
+                      desc: "No hidden fees, clear communication throughout the process.",
+                    },
+                    {
+                      title: "24/7 Support",
+                      desc: "Round-the-clock customer support available for your needs.",
+                    },
                   ].map((item, i) => (
-                    <li key={i} className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-300">{item}</span>
-                    </li>
+                    <div key={i} className="flex items-start space-x-4">
+                      <CheckCircle className="w-6 h-6 text-cyan-400 mt-1 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
+                        <p className="text-slate-400 text-sm">{item.desc}</p>
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -451,13 +470,12 @@ export default function Contact() {
                 Ready to Get Started?
               </h2>
               <p className="text-xl mb-8 text-white/90">
-                Let's bring your vision to life with our expert digital
-                solutions
+                Let's bring your vision to life with our expert digital solutions
               </p>
 
               <a
-                href="tel:+92XXXXXXXXX"
-                className="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-slate-100 transition-all duration-300"
+                href="tel:+97450445267"
+                className="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-slate-100 transition-all duration-300 hover:scale-105"
               >
                 Call Us Now
               </a>

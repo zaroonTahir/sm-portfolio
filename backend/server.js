@@ -8,7 +8,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: "https://your-app.vercel.app", // allow only your frontend
+  origin: [
+    "https://sm-portfolio-sigma.vercel.app",
+    "http://localhost:3000",
+    "http://localhost:5173"
+  ],
+  methods: ["GET", "POST"],
+  credentials: true
 }));
 app.use(bodyParser.json());
 
