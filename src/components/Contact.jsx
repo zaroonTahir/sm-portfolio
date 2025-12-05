@@ -135,9 +135,9 @@ export default function Contact() {
       // Production: https://your-backend.railway.app or https://your-backend.render.com
       const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
-      console.log("Sending to:", `${BACKEND_URL}/api/contact`);
+      console.log("Sending to:", `${BACKEND_URL}/contact`);
 
-      const response = await fetch(`${BACKEND_URL}/api/contact`, {
+      const response = await fetch(`${BACKEND_URL}/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
