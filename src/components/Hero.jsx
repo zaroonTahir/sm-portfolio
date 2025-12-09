@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight, ArrowRight } from "lucide-react";
-import hero from "../assets/hero.jpg";
+import hero from "../assets/hero1.jpg";
 
 export default function Hero() {
   const navigate = useNavigate();

@@ -85,25 +85,24 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link
-            to="/"
-            onClick={() => {
-              window.scrollTo(0, 0);
-              setIsMenuOpen(false);
-            }}
-            className="flex items-center space-x-2 group hover:opacity-80 transition-opacity animate-fade-in-left"
-          >
-            <img
-              src={logo}
-              alt="SMJ Solutions Logo"
-              className="w-13 h-13 object-contain transform group-hover:scale-110 transition-transform"
-            />
-            <div className="flex flex-col">
-              <span className="text-lg font-bold">SMJ Solutions</span>
-              <span className="text-xs text-cyan-400">Strategic Media Journey</span>
-            </div>
-          </Link>
-
+         <Link
+  to="/"
+  onClick={() => {
+    window.scrollTo(0, 0);
+    setIsMenuOpen(false);
+  }}
+  className="flex items-center space-x-2 group hover:opacity-80 transition-opacity animate-logo-entry"
+>
+  <img
+    src={logo}
+    alt="SMJ Solutions Logo"
+    className="w-13 h-13 object-contain transform group-hover:scale-110 transition-transform"
+  />
+  <div className="flex flex-col">
+    <span className="text-lg font-bold">SMJ Solutions</span>
+    <span className="text-xs text-cyan-400">Strategic Media Journey</span>
+  </div>
+</Link>
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
             {navLinks.map((link, index) => (
@@ -173,6 +172,14 @@ export default function Navbar() {
       </div>
 
       <style jsx>{`
+      @keyframes logoEntry {
+  0% { opacity: 0; transform: translateY(-20px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-logo-entry {
+  animation: logoEntry 0.8s ease-out forwards;
+}
         @keyframes fadeInLeft {
           from {
             opacity: 0;
