@@ -107,18 +107,18 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/30"
+      className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/30"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-20 animate-fade-in-up">
+        <div className="text-center mb-12 sm:mb-16 md:mb-20 animate-fade-in-up">
           <span className="text-cyan-400 font-semibold tracking-wider text-sm uppercase animate-slide-down">
             Our Services
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-6 mb-6 animate-fade-in-up stagger-1">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 sm:mt-6 mb-4 sm:mb-6 animate-fade-in-up stagger-1 px-4">
             End-to-End Digital Transformation Services
           </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto animate-fade-in-up stagger-2">
+          <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto animate-fade-in-up stagger-2 px-4">
             From software development to digital marketing, we provide
             comprehensive solutions for your business
           </p>
@@ -127,7 +127,7 @@ export default function Services() {
         {/* Service Cards Grid */}
         <div
           ref={ref}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16 md:mb-20"
         >
           {services.map((service, i) => (
             <ServiceCard
@@ -141,7 +141,7 @@ export default function Services() {
         </div>
 
         {/* Featured Services Section */}
-        <div className="space-y-12">
+        <div className="space-y-12 sm:space-y-16 md:space-y-20">
           {/* Service 1: Web Development */}
           <FeaturedServiceRow
             image={software}
@@ -225,7 +225,7 @@ export default function Services() {
 function ServiceCard({ service, index, isVisible, onLearnMore }) {
   return (
     <div
-      className="group bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2 "
+      className="group bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 sm:p-8 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2"
       style={{
         animation: isVisible
           ? `fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`
@@ -235,20 +235,20 @@ function ServiceCard({ service, index, isVisible, onLearnMore }) {
       }}
     >
       {/* Icon */}
-      <div className="w-14 h-14 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-lg flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-125 group-hover:rotate-6 transition-all duration-500">
+      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-lg flex items-center justify-center text-cyan-400 mb-4 sm:mb-6 group-hover:scale-125 group-hover:rotate-6 transition-all duration-500">
         {service.icon}
       </div>
 
       {/* Content */}
-      <h3 className="text-2xl font-bold mb-3 group-hover:text-cyan-400 transition-colors duration-300">
+      <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 group-hover:text-cyan-400 transition-colors duration-300">
         {service.title}
       </h3>
-      <p className="text-slate-400 mb-6 leading-relaxed min-h-12">
+      <p className="text-sm sm:text-base text-slate-400 mb-4 sm:mb-6 leading-relaxed min-h-12">
         {service.desc}
       </p>
 
       {/* Features List */}
-      <ul className="space-y-2 mb-8">
+      <ul className="space-y-2 mb-6 sm:mb-8">
         {service.features.map((feature, j) => (
           <li
             key={j}
@@ -270,9 +270,9 @@ function ServiceCard({ service, index, isVisible, onLearnMore }) {
       {/* CTA Button */}
       <button
         onClick={() => onLearnMore(service.slug)}
-        className="text-cyan-400 flex items-center space-x-2 group-hover:space-x-3 transition-all font-semibold cursor-pointer hover:text-cyan-300 active:scale-95"
+        className="text-cyan-400 flex items-center space-x-2 group-hover:space-x-3 transition-all font-semibold cursor-pointer hover:text-cyan-300 active:scale-95 text-sm sm:text-base"
       >
-        <span>Learn More </span>
+        <span>Learn More</span>
         <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
       </button>
 
@@ -297,11 +297,11 @@ function FeaturedServiceRow({
   const [ref, isVisible] = useScrollAnimation({ once: true });
 
   const imageElement = (
-    <div ref={ref} className="relative overflow-hidden animate-float">
+    <div ref={ref} className="relative overflow-hidden animate-float w-full">
       <img
         src={image}
         alt={title}
-        className={`rounded-2xl shadow-xl shadow-cyan-500/20 w-full h-80 object-cover transition-all duration-700 ${
+        className={`rounded-2xl shadow-xl shadow-cyan-500/20 w-full h-64 sm:h-72 md:h-80 lg:h-96 object-cover transition-all duration-700 ${
           isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
       />
@@ -310,7 +310,7 @@ function FeaturedServiceRow({
 
   const content = (
     <div
-      className="space-y-6 "
+      className="space-y-4 sm:space-y-6"
       style={{
         animation: isVisible
           ? `fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`
@@ -318,11 +318,13 @@ function FeaturedServiceRow({
         opacity: isVisible ? 1 : 0,
       }}
     >
-      <h3 className="text-3xl font-bold animate-fade-in-up">{title}</h3>
-      <p className="text-lg text-slate-300 leading-relaxed animate-fade-in-up stagger-1">
+      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold animate-fade-in-up">
+        {title}
+      </h3>
+      <p className="text-base sm:text-lg text-slate-300 leading-relaxed animate-fade-in-up stagger-1">
         {description}
       </p>
-      <div className="space-y-3">
+      <div className="space-y-3 sm:space-y-4">
         {features.map((feature, i) => (
           <div
             key={i}
@@ -335,17 +337,21 @@ function FeaturedServiceRow({
               opacity: isVisible ? 1 : 0,
             }}
           >
-            <CheckCircle className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
+            <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400 flex-shrink-0 mt-0.5 sm:mt-1" />
             <div>
-              <h4 className="font-semibold">{feature.title}</h4>
-              <p className="text-slate-400 text-sm">{feature.desc}</p>
+              <h4 className="font-semibold text-sm sm:text-base">
+                {feature.title}
+              </h4>
+              <p className="text-slate-400 text-xs sm:text-sm">
+                {feature.desc}
+              </p>
             </div>
           </div>
         ))}
       </div>
       <button
         onClick={onLearnMore}
-        className="bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+        className="bg-gradient-to-r from-cyan-500 to-blue-600 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all hover:scale-105 active:scale-95 cursor-pointer text-sm sm:text-base mt-2"
       >
         View Full Services →
       </button>
@@ -353,16 +359,16 @@ function FeaturedServiceRow({
   );
 
   return (
-    <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
       {imagePosition === "left" ? (
         <>
-          {imageElement}
-          {content}
+          <div className="order-2 lg:order-1">{imageElement}</div>
+          <div className="order-1 lg:order-2">{content}</div>
         </>
       ) : (
         <>
-          {content}
-          {imageElement}
+          <div className="order-1">{content}</div>
+          <div className="order-2">{imageElement}</div>
         </>
       )}
     </div>

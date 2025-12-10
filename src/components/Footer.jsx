@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import logo from "../assets/smj-logo.png"; // import your logo image
+import logo from "../assets/smj-logo.png";
 
 export default function Footer() {
   const navigate = useNavigate();
@@ -18,7 +18,6 @@ export default function Footer() {
   };
 
   const handlePortfolioClick = () => {
-    // Scroll to the Portfolio section on homepage
     if (location.pathname !== "/") {
       navigate("/");
       setTimeout(() => {
@@ -32,40 +31,38 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-slate-900/80 backdrop-blur-sm border-t border-slate-800 py-16 px-4 sm:px-6 lg:px-8 ">
+    <footer className="bg-slate-900/80 backdrop-blur-sm border-t border-slate-800 py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
- {/* Column 1: Company */}
-<div>
-  <div className="flex items-center space-x-2">
-    <div
-      className="animate-slide-up cursor-pointer"
-      onClick={() => handlePageClick("/")}
-    >
-      <img
-        src={logo}
-        alt="SMJ Solutions Logo"
-        className="w-22 h-22 ml-6 object-contain transition-transform duration-300 hover:scale-110"
-      />
-
-      <div className="mt-1">
-        <span className="text-xl font-bold block">SMJ Solutions</span>
-        <span className="text-xs text-cyan-400">
-          Strategic Media Journey
-        </span>
-      </div>
-    </div>
-  </div>
-</div>
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-12">
+          {/* Column 1: Company */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <div className="flex items-center space-x-2">
+              <div
+                className="animate-slide-up cursor-pointer"
+                onClick={() => handlePageClick("/")}
+              >
+                <img
+                  src={logo}
+                  alt="SMJ Solutions Logo"
+                  className="w-22 h-22 ml-6 object-contain transition-transform duration-300 hover:scale-110"
+                />
+                <div className="mt-1">
+                  <span className="text-xl font-bold block">SMJ Solutions</span>
+                  <span className="text-xs text-cyan-400">
+                    Strategic Media Journey
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Column 2: Services */}
           <div
-            className="space-y-6 animate-slide-up"
+            className="space-y-4 sm:space-y-6 animate-slide-up"
             style={{ animationDelay: "100ms" }}
           >
             <h4 className="font-bold text-lg text-white">Services</h4>
-            <ul className="space-y-3 text-slate-400 text-sm">
+            <ul className="space-y-2 sm:space-y-3 text-slate-400 text-sm">
               {[
                 { name: "Web Development", slug: "web-development" },
                 { name: "Mobile Development", slug: "mobile-development" },
@@ -101,11 +98,11 @@ export default function Footer() {
 
           {/* Column 3: Company Links */}
           <div
-            className="space-y-6 animate-slide-up"
+            className="space-y-4 sm:space-y-6 animate-slide-up"
             style={{ animationDelay: "200ms" }}
           >
             <h4 className="font-bold text-lg text-white">Company</h4>
-            <ul className="space-y-3 text-slate-400 text-sm">
+            <ul className="space-y-2 sm:space-y-3 text-slate-400 text-sm">
               <li>
                 <button
                   onClick={() => handlePageClick("/about")}
@@ -135,7 +132,7 @@ export default function Footer() {
 
           {/* Column 4: Newsletter */}
           <div
-            className="space-y-6 animate-slide-up"
+            className="space-y-4 sm:space-y-6 animate-slide-up sm:col-span-2 lg:col-span-1"
             style={{ animationDelay: "300ms" }}
           >
             <h4 className="font-bold text-lg text-white">Newsletter</h4>
@@ -159,16 +156,16 @@ export default function Footer() {
         </div>
 
         {/* Bottom Footer */}
-        <div className="border-t border-slate-800 my-12 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-400 text-sm">
-          <p>&copy; 2025 SMJ Solutions Pvt Ltd. All rights reserved.</p>
-          <div className="flex items-center space-x-8">
-            <button className="hover:text-cyan-400 transition-colors">
+        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 text-slate-400 text-sm">
+          <p className="text-center md:text-left">&copy; 2025 SMJ Solutions Pvt Ltd. All rights reserved.</p>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
+            <button className="hover:text-cyan-400 transition-colors whitespace-nowrap">
               Privacy Policy
             </button>
-            <button className="hover:text-cyan-400 transition-colors">
+            <button className="hover:text-cyan-400 transition-colors whitespace-nowrap">
               Terms of Service
             </button>
-            <button className="hover:text-cyan-400 transition-colors">
+            <button className="hover:text-cyan-400 transition-colors whitespace-nowrap">
               Sitemap
             </button>
           </div>
