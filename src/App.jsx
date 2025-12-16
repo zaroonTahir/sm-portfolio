@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ScrollUpButton from "./components/ScrollUpButton";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
@@ -9,7 +9,145 @@ import ServiceDetail from "./components/ServiceDetail";
 import PortfolioDetail from "./components/PortfolioDetail";
 import AllProjects from "./components/AllProjects";
 
+// Professional Loader Component
+const Loader = () => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + 2;
+      });
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 bg-slate-950 flex flex-col items-center justify-center z-50 overflow-hidden">
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+        <div className="absolute top-0 -right-4 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-slate-800 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+      </div>
+
+      {/* Main loader content */}
+      <div className="relative z-10 text-center px-8">
+        {/* Logo or Brand Name */}
+        <div className="mb-8 animate-fade-in">
+          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
+            SMJ Solutions
+          </h1>
+          <p className="text-cyan-400 text-sm mt-2 tracking-wider">Strategic Media Journey</p>
+        </div>
+
+        {/* Modern spinner with rings */}
+        <div className="relative w-32 h-32 mx-auto mb-8">
+          <div className="absolute inset-0 border-4 border-slate-800 rounded-full"></div>
+          <div className="absolute inset-0 border-4 border-transparent border-t-cyan-500 rounded-full animate-spin"></div>
+          <div className="absolute inset-2 border-4 border-transparent border-t-blue-600 rounded-full animate-spin animation-delay-150" style={{animationDuration: '1.5s'}}></div>
+          <div className="absolute inset-4 border-4 border-transparent border-t-cyan-400 rounded-full animate-spin animation-delay-300" style={{animationDuration: '2s'}}></div>
+        </div>
+
+        {/* Progress bar */}
+        <div className="w-64 mx-auto mb-4">
+          <div className="h-1 bg-slate-800 rounded-full overflow-hidden shadow-inner">
+            <div 
+              className="h-full bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-300 ease-out shadow-lg shadow-cyan-500/50"
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+        </div>
+
+        {/* Loading text with percentage */}
+        <div className="space-y-2">
+          <p className="text-slate-400 text-sm font-medium tracking-wider">
+            LOADING
+          </p>
+          <p className="text-cyan-400 text-2xl font-bold tabular-nums">
+            {progress}%
+          </p>
+        </div>
+
+        {/* Optional loading message */}
+        <p className="mt-6 text-slate-500 text-xs">
+          Preparing your experience...
+        </p>
+      </div>
+
+      <style jsx>{`
+        @keyframes blob {
+          0%, 100% {
+            transform: translate(0px, 0px) scale(1);
+          }
+          33% {
+            transform: translate(30px, -50px) scale(1.1);
+          }
+          66% {
+            transform: translate(-20px, 20px) scale(0.9);
+          }
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+
+        .animate-fade-in {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+
+        .animation-delay-150 {
+          animation-delay: 150ms;
+        }
+
+        .animation-delay-300 {
+          animation-delay: 300ms;
+        }
+      `}</style>
+    </div>
+  );
+};
+
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time (adjust duration as needed)
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // 3 seconds to see full animation
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <Router>
       <ScrollToTop />
