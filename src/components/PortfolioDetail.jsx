@@ -59,6 +59,32 @@ export default function PortfolioDetail() {
       ],
       gallery: [blog1, blog3],
     },
+    "maks-mentor": {
+      title: "Maks Mentor",
+      category: "Web Apps",
+      heroImage: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      overview:
+        "Maks Mentor is a comprehensive mentorship platform that connects industry experts with aspiring professionals. Features include one-on-one sessions, group workshops, progress tracking, and personalized learning paths.",
+      challenge:
+        "Creating a seamless platform where mentors and mentees can connect, schedule sessions, and track progress while maintaining engagement and accountability.",
+      solution:
+        "Built a full-stack web application with real-time scheduling, video integration, progress dashboards, and automated reminders. Implemented a sophisticated matching algorithm to pair mentors with mentees based on goals and expertise.",
+      technologies: [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Socket.io",
+        "Stripe API",
+        "TailwindCSS",
+        "Video SDK"
+      ],
+      gallery: [
+        "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/5905857/pexels-photo-5905857.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ],
+    },
     "crypto-tracker": {
       title: "Crypto Tracker",
       category: "Websites",
@@ -131,6 +157,32 @@ export default function PortfolioDetail() {
         "TailwindCSS",
       ],
       gallery: [lms1, lms2],
+    },
+    "dynamics-group-services": {
+      title: "Dynamic's Group Services",
+      category: "Websites",
+      heroImage:
+        "https://images.pexels.com/photos/416405/pexels-photo-416405.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      overview:
+        "A professional corporate website for Dynamic's Group Services, showcasing their comprehensive business solutions, consulting services, and industry expertise. The site features a modern design with interactive service portfolios, client testimonials, and a streamlined contact system.",
+      challenge:
+        "Creating a sophisticated online presence that effectively communicates the company's diverse service offerings while maintaining a professional image and ensuring easy navigation for potential clients across different industries.",
+      solution:
+        "Developed a modern, responsive website using React and TailwindCSS with optimized performance, SEO-friendly architecture, and engaging animations. Implemented a content management approach for easy updates, integrated contact forms with email automation, and created dedicated service pages highlighting their expertise.",
+      technologies: [
+        "React",
+        "TailwindCSS",
+        "Node.js",
+        "Express",
+        "Email API",
+        "SEO Optimization",
+      ],
+      gallery: [
+        "https://images.pexels.com/photos/416405/pexels-photo-416405.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600",
+      ],
     },
   };
 

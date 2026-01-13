@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Facebook, Twitter, Instagram, Linkedin, Send } from "lucide-react";
-import logo from "../assets/smj-logo.png";
+import { ArrowRight, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import logo from "../assets/smj-logo.png"; // import your logo image
 
 export default function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: ""
-  });
 
   const handleServiceClick = (slug) => {
     navigate(`/services/${slug}`);
+    window.scrollTo(0, 0);
   };
 
   const handlePageClick = (path) => {
     navigate(path);
+    // window.scrollTo(0, 0);
   };
 
   const handlePortfolioClick = () => {
+    // Scroll to the Portfolio section on homepage
     if (location.pathname !== "/") {
       navigate("/");
       setTimeout(() => {
@@ -34,190 +31,195 @@ export default function Footer() {
     }
   };
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Add your form submission logic here
-  };
+  const socialLinks = [
+    {
+      name: "Facebook",
+      icon: <Facebook className="w-5 h-5" />,
+      url: "https://facebook.com/smjsolutions",
+      hoverColor: "hover:bg-blue-600"
+    },
+    {
+      name: "Instagram",
+      icon: <Instagram className="w-5 h-5" />,
+      url: "https://instagram.com/smjsolutions",
+      hoverColor: "hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-600 hover:to-orange-500"
+    },
+    {
+      name: "LinkedIn",
+      icon: <Linkedin className="w-5 h-5" />,
+      url: "https://linkedin.com/company/smjsolutions",
+      hoverColor: "hover:bg-blue-700"
+    },
+    {
+      name: "YouTube",
+      icon: <Youtube className="w-5 h-5" />,
+      url: "https://youtube.com/@smjsolutions",
+      hoverColor: "hover:bg-red-600"
+    }
+  ];
 
   return (
-    <footer className="bg-gradient-to-b from-slate-950 to-black border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-12">
-          {/* Left Section - Connect with Us */}
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8">
-              Connect with Us
-            </h2>
+    <footer className="bg-slate-900/80 backdrop-blur-sm border-t border-slate-800 py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Main Footer Grid - Responsive */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12 mb-8 sm:mb-12">
+          {/* Column 1: Company */}
+          <div className="sm:col-span-2 md:col-span-1">
+            <div
+              className="animate-slide-up cursor-pointer text-center sm:text-left"
+              onClick={() => handlePageClick("/")}
+            >
+              <img
+                src={logo}
+                alt="SMJ Solutions Logo"
+                className="w-16 h-16 sm:w-20 sm:h-20 object-contain transition-transform duration-300 hover:scale-110 mx-auto sm:mx-0"
+              />
 
-            {/* Social Media Icons */}
-            <div className="flex gap-4 mb-10">
-              <a
-                href="#"
-                className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-600 hover:text-white transition-all duration-300 hover:scale-110"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-600 hover:text-white transition-all duration-300 hover:scale-110"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-600 hover:text-white transition-all duration-300 hover:scale-110"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-600 hover:text-white transition-all duration-300 hover:scale-110"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-600 hover:text-white transition-all duration-300 hover:scale-110"
-              >
-                <span className="font-bold text-lg">M</span>
-              </a>
+              <div className="mt-3 sm:mt-4">
+                <span className="text-lg sm:text-xl font-bold block">
+                  SMJ Solutions
+                </span>
+                <span className="text-xs text-cyan-400">
+                  Strategic Media Journey
+                </span>
+              </div>
             </div>
 
-            {/* Office Locations */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
-              {/* Headoffice */}
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl">🇵🇰</span>
-                  <h3 className="text-white font-bold">Headoffice:</h3>
-                </div>
-                <div className="text-slate-400 text-sm space-y-1">
-                  <p>Rahim Yar Khan, Pakistan</p>
-                  <p>Street 45, Block B</p>
-                  <p>Model Town</p>
-                  <p className="mt-3">
-                    <a href="mailto:info@smjsols.com" className="hover:text-cyan-400 transition-colors">
-                      info@smjsols.com
-                    </a>
-                  </p>
-                  <p>
-                    <a href="tel:+923001234567" className="hover:text-cyan-400 transition-colors">
-                      +92 300 1234567
-                    </a>
-                  </p>
-                </div>
-              </div>
-
-              {/* Branch 1 */}
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl">🇭🇰</span>
-                  <h3 className="text-white font-bold">Branch:</h3>
-                </div>
-                <div className="text-slate-400 text-sm space-y-1">
-                  <p>HONG KONG</p>
-                  <p>903 Dannies House,</p>
-                  <p>20 Luard Road,</p>
-                  <p>Wan Chai, Hong Kong</p>
-                </div>
-              </div>
-
-              {/* Branch 2 */}
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl">🇬🇧</span>
-                  <h3 className="text-white font-bold">Branch:</h3>
-                </div>
-                <div className="text-slate-400 text-sm space-y-1">
-                  <p>LONDON, UNITED KINGDOM</p>
-                  <p>115 London Road,</p>
-                  <p>Morden,</p>
-                  <p>England, SM4 5HP</p>
-                </div>
-              </div>
+            {/* Social Media Icons */}
+            <div className="flex justify-center sm:justify-start gap-3 mt-6">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition-all duration-300 hover:scale-110 hover:border-transparent ${social.hoverColor}`}
+                  aria-label={social.name}
+                >
+                  {social.icon}
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Right Section - Contact Form */}
-          <div>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your name"
-                value={formData.name}
-                onChange={handleInputChange}
-                className="w-full px-4 py-4 bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                required
-              />
+          {/* Column 2: Services */}
+          <div className="animate-slide-up" style={{ animationDelay: "100ms" }}>
+            <h4 className="font-bold text-base sm:text-lg text-white mb-4 text-center sm:text-left">
+              Services
+            </h4>
+            <ul className="space-y-2.5 sm:space-y-3 text-slate-400 text-xs sm:text-sm text-center sm:text-left">
+              {[
+                { name: "Web Development", slug: "web-development" },
+                { name: "Mobile Development", slug: "mobile-development" },
+                { name: "AI Automation", slug: "ai-automation" },
+                { name: "SEO & Digital Marketing", slug: "digital-marketing" },
+                { name: "ERP & SaaS Solutions", slug: "erp-saas" },
+                {
+                  name: "Creative & Media Production",
+                  slug: "media-production",
+                },
+                {
+                  name: "GHL Development & Integration",
+                  slug: "ghl-development",
+                },
+                {
+                  name: "Marketing Consultation & Strategies",
+                  slug: "marketing-consultation",
+                },
+              ].map((service, i) => (
+                <li key={i}>
+                  <button
+                    onClick={() => handleServiceClick(service.slug)}
+                    className="hover:text-cyan-400 transition-colors duration-300 hover:translate-x-1 inline-block group cursor-pointer"
+                  >
+                    <span className="group-hover:underline">
+                      {service.name}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Company Links */}
+          <div className="animate-slide-up" style={{ animationDelay: "200ms" }}>
+            <h4 className="font-bold text-base sm:text-lg text-white mb-4 text-center sm:text-left">
+              Company
+            </h4>
+            <ul className="space-y-2.5 sm:space-y-3 text-slate-400 text-xs sm:text-sm text-center sm:text-left">
+              <li>
+                <button
+                  onClick={() => handlePageClick("/about")}
+                  className="hover:text-cyan-400 cursor-pointer transition-colors duration-300 hover:translate-x-1 inline-block group"
+                >
+                  <span className="group-hover:underline">About Us</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={handlePortfolioClick}
+                  className="hover:text-cyan-400 cursor-pointer transition-colors duration-300 hover:translate-x-1 inline-block group"
+                >
+                  <span className="group-hover:underline">Portfolio</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handlePageClick("/contact")}
+                  className="hover:text-cyan-400 cursor-pointer transition-colors duration-300 hover:translate-x-1 inline-block group"
+                >
+                  <span className="group-hover:underline">Contact</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Newsletter */}
+          <div
+            className="sm:col-span-2 md:col-span-1 lg:col-span-1 animate-slide-up"
+            style={{ animationDelay: "300ms" }}
+          >
+            <h4 className="font-bold text-base sm:text-lg text-white mb-4 text-center sm:text-left">
+              Newsletter
+            </h4>
+            <p className="text-slate-400 text-xs sm:text-sm mb-4 text-center sm:text-left leading-relaxed">
+              Subscribe for digital tips and latest industry insights
+            </p>
+            <form className="flex flex-col sm:flex-row gap-2">
               <input
                 type="email"
-                name="email"
                 placeholder="Your email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="w-full px-4 py-4 bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                required
+                className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-500 transition-colors text-white placeholder-slate-500 text-xs sm:text-sm"
               />
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Your number"
-                value={formData.phone}
-                onChange={handleInputChange}
-                className="w-full px-4 py-4 bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                required
-              />
-              <textarea
-                name="message"
-                placeholder="Message for us"
-                value={formData.message}
-                onChange={handleInputChange}
-                rows="5"
-                className="w-full px-4 py-4 bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
-                required
-              ></textarea>
-              <div className="flex justify-end">
-                <button
-                  type="submit"
-                  className="group bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-8 py-3 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/40 flex items-center gap-2"
-                >
-                  Submit
-                  <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2.5 sm:py-3 rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 group flex-shrink-0 flex justify-center items-center"
+              >
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
             </form>
           </div>
         </div>
 
         {/* Bottom Footer */}
-        <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-slate-400 text-sm">
-          <p className="text-center sm:text-left">
+        <div className="border-t border-slate-800 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-slate-400 text-xs sm:text-sm">
+          <p className="text-center sm:text-left order-2 sm:order-1">
             &copy; 2025 SMJ Solutions Pvt Ltd. All rights reserved.
           </p>
-          <div className="flex items-center space-x-6 flex-wrap justify-center">
-            <button
+          <div className="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm flex-wrap justify-center order-1 sm:order-2">
+            <button 
               onClick={() => handlePageClick("/privacy-policy")}
               className="hover:text-cyan-400 transition-colors whitespace-nowrap"
             >
               Privacy Policy
             </button>
-            <button
+            <button 
               onClick={() => handlePageClick("/terms-and-conditions")}
               className="hover:text-cyan-400 transition-colors whitespace-nowrap"
             >
               Terms & Conditions
             </button>
-            <button
+            <button 
               onClick={() => handlePageClick("/sitemap")}
               className="hover:text-cyan-400 transition-colors whitespace-nowrap"
             >

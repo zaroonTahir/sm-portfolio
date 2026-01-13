@@ -72,7 +72,7 @@ export default function Contact() {
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Call Us",
-      lines: ["+97450445267", "+923216716065"],
+      lines: ["+97450445267", "+923216716065", "+17372867459"],
     },
 
     {

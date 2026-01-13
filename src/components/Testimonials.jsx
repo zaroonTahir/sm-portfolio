@@ -8,6 +8,16 @@ export default function Testimonials() {
 
   const testimonials = [
     {
+      name: "Syed Kamran Hussain",
+      company: "Maks Mentor",
+      project: "Web Platform Development",
+      rating: 5,
+      review:
+        "Outstanding work on our immigration mentorship platform! They delivered a professional, user-friendly solution that perfectly serves our clients and team. Highly recommended for complex web applications.",
+      image:
+        "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150",
+    },
+    {
       name: "Emma W.",
       company: "StyleHive",
       project: "Social Media Marketing",

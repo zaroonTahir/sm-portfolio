@@ -39,6 +39,14 @@ export default function AllProjects() {
       description: "SEO-optimized content generation using AI",
     },
     {
+      title: "Maks Mentor",
+      category: "Web Apps",
+      image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800",
+      slug: "maks-mentor",
+      color: "from-orange-500 to-amber-500",
+      description: "Professional mentorship platform connecting experts and learners",
+    },
+    {
       title: "Crypto Tracker",
       category: "Websites",
       image:
@@ -66,11 +74,20 @@ export default function AllProjects() {
     },
     {
       title: "Unique Engineering",
-      category: "Website",
+      category: "Websites",
       image: un,
       slug: "unique-engineering",
       color: "from-pink-500 to-rose-500",
       description: "Engineering for a Sustainable Future",
+    },
+    {
+      title: "Dynamic's Group Services",
+      category: "Websites",
+      image:
+        "https://images.pexels.com/photos/416405/pexels-photo-416405.jpeg?auto=compress&cs=tinysrgb&w=800",
+      slug: "dynamics-group-services",
+      color: "from-slate-500 to-gray-600",
+      description: "Professional business services and consulting solutions",
     },
   ];
 
