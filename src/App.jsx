@@ -8,6 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import ServiceDetail from "./components/ServiceDetail";
 import PortfolioDetail from "./components/PortfolioDetail";
 import AllProjects from "./components/AllProjects";
+import TermsAndConditions from "./components/TermsandCondition";
 
 // Professional Loader Component
 const Loader = () => {
@@ -159,6 +160,7 @@ function App() {
           <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
           <Route path="/portfolio" element={<AllProjects />} />
           <Route path="/portfolio/:projectSlug" element={<PortfolioDetail />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         </Routes>
         <ScrollUpButton />
         <style jsx>{`

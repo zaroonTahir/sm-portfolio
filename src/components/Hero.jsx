@@ -1,15 +1,18 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { ChevronRight, ArrowRight, Zap, Users, Award } from "lucide-react";
-import hero from "../assets/hero1.jpg";
+import hero from "../assets/hero1.jpg"
+// Import your images - replace these with your actual image paths
+//const hero = "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop";
+const meta = "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg";
+const aws = "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg";
+const google = "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg";
+const hubspot = "https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg";
 
 export default function Hero() {
-  const navigate = useNavigate();
   const canvasRef = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
 
-  // Handle mouse movement for parallax
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -28,7 +31,6 @@ export default function Hero() {
     };
   }, []);
 
-  // Canvas animation for video-like background
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -63,12 +65,7 @@ export default function Hero() {
     const animate = () => {
       time += 0.016;
 
-      const gradient = ctx.createLinearGradient(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
       gradient.addColorStop(0, "#0f172a");
       gradient.addColorStop(0.5, "#1e293b");
       gradient.addColorStop(1, "#0f172a");
@@ -96,23 +93,10 @@ export default function Hero() {
         const pulse = Math.sin(time + i * 0.05) * 0.5 + 0.5;
         const finalOpacity = p.opacity * pulse;
 
-        const gradient = ctx.createRadialGradient(
-          p.x,
-          p.y,
-          0,
-          p.x,
-          p.y,
-          p.size * 3
-        );
+        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
         const hueShift = (p.hue + time * 20) % 360;
-        gradient.addColorStop(
-          0,
-          `hsla(${hueShift}, 100%, 60%, ${finalOpacity * 0.9})`
-        );
-        gradient.addColorStop(
-          0.5,
-          `hsla(${hueShift}, 100%, 50%, ${finalOpacity * 0.5})`
-        );
+        gradient.addColorStop(0, `hsla(${hueShift}, 100%, 60%, ${finalOpacity * 0.9})`);
+        gradient.addColorStop(0.5, `hsla(${hueShift}, 100%, 50%, ${finalOpacity * 0.5})`);
         gradient.addColorStop(1, `hsla(${hueShift}, 100%, 40%, 0)`);
 
         ctx.fillStyle = gradient;
@@ -201,14 +185,7 @@ export default function Hero() {
       const flareX = canvas.width / 2 + Math.cos(time * 0.1) * 200;
       const flareY = canvas.height / 2 + Math.sin(time * 0.12) * 150;
 
-      const flareGradient = ctx.createRadialGradient(
-        flareX,
-        flareY,
-        0,
-        flareX,
-        flareY,
-        300
-      );
+      const flareGradient = ctx.createRadialGradient(flareX, flareY, 0, flareX, flareY, 300);
       flareGradient.addColorStop(0, "rgba(147, 197, 253, 0.1)");
       flareGradient.addColorStop(0.5, "rgba(34, 211, 238, 0.05)");
       flareGradient.addColorStop(1, "rgba(34, 211, 238, 0)");
@@ -230,12 +207,16 @@ export default function Hero() {
   }, []);
 
   const handleGetConsultation = () => {
-    navigate("/contact");
-    window.scrollTo(0, 0);
+    alert("Navigate to contact page");
+  };
+
+  const handleExploreServices = () => {
+    const element = document.getElementById("services");
+    if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center">
+    <section className="relative overflow-hidden bg-slate-950 text-white">
       {/* Animated Canvas Background */}
       <canvas
         ref={canvasRef}
@@ -249,51 +230,49 @@ export default function Hero() {
       {/* Gradient mesh overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950/20 via-transparent to-slate-950/20"></div>
 
-      {/* Parallax ambient glow */}
+      {/* Parallax ambient glows */}
       <div
         className="absolute top-1/3 -left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"
         style={{
-          transform: `translate(${mousePosition.x * 0.02}px, ${
-            scrollY * 0.5
-          }px)`,
+          transform: `translate(${mousePosition.x * 0.02}px, ${scrollY * 0.5}px)`,
           transition: "transform 0.3s ease-out",
         }}
       ></div>
       <div
         className="absolute bottom-1/3 -right-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl"
         style={{
-          transform: `translate(-${mousePosition.x * 0.015}px, -${
-            scrollY * 0.3
-          }px)`,
+          transform: `translate(-${mousePosition.x * 0.015}px, -${scrollY * 0.3}px)`,
           transition: "transform 0.3s ease-out",
         }}
       ></div>
 
-      {/* MOBILE & LAPTOP: TWO-COLUMN LAYOUT */}
-      <div className="md:hidden lg:block max-w-7xl mx-auto relative z-10 w-full">
-        <div className="grid md:grid-cols-2 gap-14 items-center">
-          {/* LEFT CONTENT */}
-          <div className="space-y-6 text-center md:text-left">
-            <h1 className="font-extrabold animate-fade-in-up text-center md:text-center lg:text-left">
-              <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-snug sm:leading-snug md:leading-snug lg:leading-tight">
+      {/* Main Content Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+        
+        {/* Hero Content */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+          
+          {/* Left Content */}
+          <div className="space-y-8 text-center lg:text-left">
+            <h1 className="font-extrabold">
+              <span className="block text-4xl sm:text-5xl lg:text-6xl leading-tight mb-3">
                 Empowering Businesses with
               </span>
-
-              <span className="block mt-2 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-snug sm:leading-snug md:leading-snug lg:leading-tight">
+              <span className="block bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent text-4xl sm:text-5xl lg:text-6xl leading-tight">
                 Digital Innovation & Automation
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-xl mx-auto md:mx-0 animate-fade-in-up stagger-1">
+            <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0">
               We build modern software, powerful AI automation systems, and
               high-performance digital strategies that drive measurable growth.
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2 animate-fade-in-up stagger-2">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <button
                 onClick={handleGetConsultation}
-                className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 rounded-lg font-medium sm:font-semibold transition-all hover:shadow-lg hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 backdrop-blur-sm border border-cyan-400/20 cursor-pointer"
+                className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 rounded-lg font-semibold transition-all hover:shadow-lg hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 backdrop-blur-sm border border-cyan-400/20"
               >
                 <span className="relative z-10 flex items-center justify-center space-x-2">
                   <span>Get a Free Consultation</span>
@@ -302,11 +281,8 @@ export default function Hero() {
               </button>
 
               <button
-                onClick={() => {
-                  const element = document.getElementById("services");
-                  if (element) element.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="group border border-cyan-500/50 px-6 py-3 rounded-lg font-medium sm:font-semibold hover:bg-cyan-500/10 transition-all backdrop-blur-sm flex items-center justify-center space-x-2 hover:border-cyan-400 active:scale-95 cursor-pointer"
+                onClick={handleExploreServices}
+                className="group border border-cyan-500/50 px-8 py-4 rounded-lg font-semibold hover:bg-cyan-500/10 transition-all backdrop-blur-sm flex items-center justify-center space-x-2 hover:border-cyan-400 active:scale-95"
               >
                 <span>Explore Our Services</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -314,149 +290,104 @@ export default function Hero() {
             </div>
 
             {/* Key Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-slate-700/50 max-w-xl mx-auto md:mx-0 animate-fade-in-up stagger-3">
+            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-700/50">
               <div className="text-center transform hover:scale-110 transition-transform">
+                <div className="flex items-center justify-center mb-2">
+                  <Zap className="w-5 h-5 text-cyan-400 mr-1" />
+                </div>
                 <div className="text-3xl font-bold text-cyan-400">300+</div>
-                <div className="text-sm text-slate-300">Projects Completed</div>
+                <div className="text-sm text-slate-400 mt-1">Projects Completed</div>
               </div>
               <div className="text-center transform hover:scale-110 transition-transform">
+                <div className="flex items-center justify-center mb-2">
+                  <Users className="w-5 h-5 text-blue-400 mr-1" />
+                </div>
                 <div className="text-3xl font-bold text-cyan-400">50+</div>
-                <div className="text-sm text-slate-300">Team Members</div>
+                <div className="text-sm text-slate-400 mt-1">Team Members</div>
               </div>
               <div className="text-center transform hover:scale-110 transition-transform">
+                <div className="flex items-center justify-center mb-2">
+                  <Award className="w-5 h-5 text-cyan-400 mr-1" />
+                </div>
                 <div className="text-3xl font-bold text-cyan-400">7+</div>
-                <div className="text-sm text-slate-300">Years in Business</div>
+                <div className="text-sm text-slate-400 mt-1">Years in Business</div>
               </div>
             </div>
           </div>
 
-          {/* RIGHT SIDE IMAGE */}
-          <div className="relative flex justify-center md:justify-end hero-enter">
-            <div className="hero-float relative w-[320px] sm:w-[380px] md:w-[460px] lg:w-[520px] aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-slate-800/50 to-slate-950/60 backdrop-blur-xl shadow-2xl shadow-cyan-500/15 transition-all duration-700 ease-out hover:scale-[1.04] group">
+          {/* Right Side Image */}
+          <div className="relative flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-lg aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-slate-800/50 to-slate-950/60 backdrop-blur-xl shadow-2xl shadow-cyan-500/15 transition-all duration-700 ease-out hover:scale-105 group">
               <img
                 src={hero}
                 alt="Digital Innovation"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
-
-              {/* Soft cinematic overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-600/15 pointer-events-none" />
             </div>
-
+            
             {/* Ambient glow */}
-            <div className="absolute -bottom-12 -right-12 w-[280px] h-[280px] md:w-[360px] md:h-[360px] bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full opacity-25 blur-[90px] -z-10" />
+            <div className="absolute -bottom-16 -right-16 w-80 h-80 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full opacity-25 blur-[90px] -z-10" />
           </div>
         </div>
-      </div>
 
-      {/* TABLET: CENTERED VERTICAL LAYOUT */}
-      <div className="hidden md:block lg:hidden max-w-5xl mx-auto relative z-10 w-full">
-        {/* HEADING - CENTERED */}
-        <div className="text-center space-y-6 md:space-y-8 mb-10 md:mb-12 animate-fade-in-up">
-          <h1 className="font-extrabold">
-            <span className="block text-4xl md:text-5xl leading-tight text-white mb-3 md:mb-4">
-              Empowering Businesses with
-            </span>
-            <span className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-4xl md:text-5xl leading-tight">
-              Digital Innovation & Automation
-            </span>
-          </h1>
-
-          <p className="text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            We build modern software, powerful AI automation systems, and
-            high-performance digital strategies that drive measurable growth.
-          </p>
-        </div>
-
-        {/* BUTTONS - CENTERED BELOW HEADING */}
-        <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center mb-10 md:mb-14 flex-wrap animate-fade-in-up">
-          <button
-            onClick={handleGetConsultation}
-            className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 px-8 md:px-10 py-3 md:py-4 rounded-lg font-medium md:text-lg transition-all hover:shadow-lg hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 backdrop-blur-sm border border-cyan-400/20 cursor-pointer whitespace-nowrap"
-          >
-            <span className="relative z-10 flex items-center justify-center space-x-2">
-              <span>Get a Free Consultation</span>
-              <ChevronRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              const element = document.getElementById("services");
-              if (element) element.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="group border border-cyan-500/50 px-8 md:px-10 py-3 md:py-4 rounded-lg font-medium md:text-lg hover:bg-cyan-500/10 transition-all backdrop-blur-sm flex items-center justify-center space-x-2 hover:border-cyan-400 active:scale-95 cursor-pointer whitespace-nowrap"
-          >
-            <span>Explore Our Services</span>
-            <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
-
-        {/* DIVIDER LINE */}
-        <div className="flex items-center justify-center gap-4 mb-12 md:mb-16 animate-fade-in-up">
-          <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent flex-1 max-w-xs md:max-w-sm"></div>
-          <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-cyan-400/60"></div>
-          <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent flex-1 max-w-xs md:max-w-sm"></div>
-        </div>
-
-        {/* STATS SECTION */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16 animate-fade-in-up">
-          {/* Stat 1 */}
-          <div className="flex flex-col items-center text-center p-6 md:p-8 rounded-2xl bg-slate-800/40 backdrop-blur-md border border-cyan-500/20 hover:border-cyan-400/50 hover:bg-slate-800/60 transition-all duration-300 group cursor-pointer">
-            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-cyan-500/30 to-blue-500/30 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
-              <Zap className="w-6 h-6 md:w-7 md:h-7 text-cyan-400" />
-            </div>
-            <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-2 md:mb-3">
-              300+
-            </div>
-            <div className="text-xs md:text-sm text-slate-300">
-              Projects Completed
-            </div>
+        {/* Partner Logos Section */}
+        <div className="border-t border-slate-700/50 pt-12">
+          <div className="text-center mb-8">
+            <p className="text-sm uppercase tracking-wider text-slate-400 font-semibold">Trusted Partners</p>
           </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 items-center">
+            {/* Meta */}
+            <div className="flex flex-col items-center gap-3 group">
+              <div className="h-16 flex items-center justify-center">
+                <img
+                  src={meta}
+                  alt="Meta"
+                  className="h-12 md:h-14 object-contain grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
+                />
+              </div>
+              <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">Business Partner</span>
+            </div>
 
-          {/* Stat 2 */}
-          <div className="flex flex-col items-center text-center p-6 md:p-8 rounded-2xl bg-slate-800/40 backdrop-blur-md border border-cyan-500/20 hover:border-cyan-400/50 hover:bg-slate-800/60 transition-all duration-300 group cursor-pointer">
-            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
-              <Users className="w-6 h-6 md:w-7 md:h-7 text-blue-400" />
+            {/* AWS */}
+            <div className="flex flex-col items-center gap-3 group">
+              <div className="h-16 flex items-center justify-center">
+                <img
+                  src={aws}
+                  alt="AWS"
+                  className="h-12 md:h-14 object-contain grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
+                />
+              </div>
+              <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">Cloud Partner</span>
             </div>
-            <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-2 md:mb-3">
-              50+
-            </div>
-            <div className="text-xs md:text-sm text-slate-300">
-              Team Members
-            </div>
-          </div>
 
-          {/* Stat 3 */}
-          <div className="flex flex-col items-center text-center p-6 md:p-8 rounded-2xl bg-slate-800/40 backdrop-blur-md border border-cyan-500/20 hover:border-cyan-400/50 hover:bg-slate-800/60 transition-all duration-300 group cursor-pointer">
-            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-cyan-500/30 to-blue-500/30 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
-              <Award className="w-6 h-6 md:w-7 md:h-7 text-cyan-400" />
+            {/* Google */}
+            <div className="flex flex-col items-center gap-3 group">
+              <div className="h-16 flex items-center justify-center">
+                <img
+                  src={google}
+                  alt="Google"
+                  className="h-12 md:h-14 object-contain grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
+                />
+              </div>
+              <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">Technology Partner</span>
             </div>
-            <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-2 md:mb-3">
-              7+
-            </div>
-            <div className="text-xs md:text-sm text-slate-300">
-              Years in Business
+
+            {/* HubSpot */}
+            <div className="flex flex-col items-center gap-3 group">
+              <div className="h-16 flex items-center justify-center">
+                <img
+                  src={hubspot}
+                  alt="HubSpot"
+                  className="h-12 md:h-14 object-contain grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
+                />
+              </div>
+              <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">CRM Partner</span>
             </div>
           </div>
         </div>
 
-        {/* IMAGE SECTION - BOTTOM */}
-        <div className="relative w-full animate-fade-in-up">
-          <div className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-br from-slate-800/50 to-slate-950/60 backdrop-blur-xl shadow-2xl shadow-cyan-500/20 border border-cyan-500/20 group hover:border-cyan-400/40 transition-all duration-500">
-            <div className="relative overflow-hidden h-80 md:h-96">
-              <img
-                src={hero}
-                alt="Digital Innovation"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-600/15 pointer-events-none" />
-            </div>
-          </div>
-
-          {/* Ambient glow behind image */}
-          <div className="absolute -bottom-32 md:-bottom-40 left-1/2 -translate-x-1/2 w-[500px] md:w-[600px] h-[500px] md:h-[600px] bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full opacity-15 blur-[120px] -z-10" />
-        </div>
       </div>
     </section>
   );

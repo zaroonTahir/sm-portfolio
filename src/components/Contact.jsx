@@ -423,7 +423,7 @@ export default function Contact() {
                 <ul className="space-y-4">
                   {[
                     "Fast response time within 24 hours",
-                    "Expert team with 5+ years experience",
+                    "Expert team with 7+ years experience",
                     "Customized solutions for your needs",
                     "Transparent pricing with no hidden fees",
                     "24/7 customer support available",

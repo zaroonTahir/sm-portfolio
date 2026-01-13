@@ -1,17 +1,17 @@
 import React from 'react';
-import SECPLogo from '../assets/secp.jpeg';
-import PashaLogo from '../assets/pasha.png';
-import PSEBLogo from '../assets/pseb.png';
-import ChamberLogo from '../assets/chamber.jpeg';
-import FBRLogo from '../assets/fbr.png';
+import AWSLogo from '../assets/aws.png';
+import HubspotLogo from '../assets/hubspot.png';
+import MetaLogo from '../assets/meta.png';
+import GoogleLogo from '../assets/google.png';
+//import FBRLogo from '../assets/fbr.png';
 
 export default function TrustedBrands() {
   const brands = [
-    { name: "SECP", logo: SECPLogo },
-    { name: "Pasha", logo: PashaLogo },
-    { name: "PSEB", logo: PSEBLogo },
-    { name: "Chamber of Commerce", logo: ChamberLogo },
-    { name: "FBR", logo: FBRLogo }
+    { name: "AWS", logo: AWSLogo },
+    { name: "Hubspot", logo: HubspotLogo },
+    { name: "Meta", logo: MetaLogo },
+    { name: "Google", logo: GoogleLogo },
+   // { name: "FBR", logo: FBRLogo }
   ];
 
   return (
@@ -19,9 +19,8 @@ export default function TrustedBrands() {
       <div className="max-w-6xl mx-auto">
        <div className="text-center mb-16 animate-slide-up">
   <h2 className="text-3xl md:text-4xl font-bold mb-4">
-    Trusted by leading Pakistani organizations
-    <br />
-    and regulatory authorities.
+    We rethink business growth for you through our collective experience 
+    with strategic partner ecosystem.
   </h2>
 </div>
 

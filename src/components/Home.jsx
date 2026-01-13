@@ -7,6 +7,8 @@ import Portfolio from "./Portfolio";
 import HowItWorks from "./HowItWorks";
 import Testimonials from "./Testimonials";
 import Footer from "./Footer";
+import TermsAndConditions from "./TermsandCondition";
+
 
 // CTA Component
 function CTA() {
@@ -143,7 +145,7 @@ export default function Home() {
       <div className="relative z-10">
         <Navbar />
         <Hero />
-        <TrustedBrands />
+       
         <Services />
         <WhyChooseUs />
         <Portfolio />
@@ -151,6 +153,7 @@ export default function Home() {
         <Testimonials />
         <CTA />
         <Footer />
+       
       </div>
     </div>
   );
