@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { ChevronRight, ArrowRight, Zap, Users, Award } from "lucide-react";
 import hero from "../assets/hero1.jpg"
-// Import your images - replace these with your actual image paths
+
 //const hero = "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop";
 const meta = "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg";
 const aws = "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg";
@@ -12,6 +12,7 @@ export default function Hero() {
   const canvasRef = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
+  const [activePartner, setActivePartner] = useState(null);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -215,6 +216,17 @@ export default function Hero() {
     if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handlePartnerTouch = (partnerId) => {
+    setActivePartner(activePartner === partnerId ? null : partnerId);
+  };
+
+  const partners = [
+    { id: 'meta', src: meta, alt: 'Meta', label: 'Business Partner' },
+    { id: 'aws', src: aws, alt: 'AWS', label: 'Cloud Partner' },
+    { id: 'google', src: google, alt: 'Google', label: 'Technology Partner' },
+    { id: 'hubspot', src: hubspot, alt: 'HubSpot', label: 'CRM Partner' }
+  ];
+
   return (
     <section className="relative overflow-hidden bg-slate-950 text-white">
       {/* Animated Canvas Background */}
@@ -338,53 +350,37 @@ export default function Hero() {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 items-center">
-            {/* Meta */}
-            <div className="flex flex-col items-center gap-3 group">
-              <div className="h-16 flex items-center justify-center">
-                <img
-                  src={meta}
-                  alt="Meta"
-                  className="h-12 md:h-14 object-contain grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
-                />
+            {partners.map((partner) => (
+              <div
+                key={partner.id}
+                onClick={() => handlePartnerTouch(partner.id)}
+                onTouchStart={() => handlePartnerTouch(partner.id)}
+                className={`flex flex-col items-center gap-3 group cursor-pointer transition-all duration-300 ${
+                  activePartner === partner.id ? 'active-partner' : ''
+                }`}
+              >
+                <div className="h-16 flex items-center justify-center">
+                  <img
+                    src={partner.src}
+                    alt={partner.alt}
+                    className={`h-12 md:h-14 object-contain transition-all duration-300 ${
+                      activePartner === partner.id
+                        ? 'grayscale-0 scale-110'
+                        : 'grayscale group-hover:grayscale-0 group-hover:scale-110'
+                    }`}
+                  />
+                </div>
+                <span
+                  className={`text-xs transition-colors duration-300 ${
+                    activePartner === partner.id
+                      ? 'text-slate-400'
+                      : 'text-slate-500 group-hover:text-slate-400'
+                  }`}
+                >
+                  {partner.label}
+                </span>
               </div>
-              <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">Business Partner</span>
-            </div>
-
-            {/* AWS */}
-            <div className="flex flex-col items-center gap-3 group">
-              <div className="h-16 flex items-center justify-center">
-                <img
-                  src={aws}
-                  alt="AWS"
-                  className="h-12 md:h-14 object-contain grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
-                />
-              </div>
-              <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">Cloud Partner</span>
-            </div>
-
-            {/* Google */}
-            <div className="flex flex-col items-center gap-3 group">
-              <div className="h-16 flex items-center justify-center">
-                <img
-                  src={google}
-                  alt="Google"
-                  className="h-12 md:h-14 object-contain grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
-                />
-              </div>
-              <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">Technology Partner</span>
-            </div>
-
-            {/* HubSpot */}
-            <div className="flex flex-col items-center gap-3 group">
-              <div className="h-16 flex items-center justify-center">
-                <img
-                  src={hubspot}
-                  alt="HubSpot"
-                  className="h-12 md:h-14 object-contain grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
-                />
-              </div>
-              <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">CRM Partner</span>
-            </div>
+            ))}
           </div>
         </div>
 
