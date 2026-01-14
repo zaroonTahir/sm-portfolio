@@ -47,7 +47,7 @@ export default function Footer() {
     {
       name: "Facebook",
       icon: <Facebook className="w-5 h-5" />,
-      url: "https://facebook.com/smjsolutions",
+      url: "https://www.facebook.com/profile.php?id=61574867952124",
       hoverColor: "hover:bg-blue-600"
     },
     {
@@ -59,13 +59,13 @@ export default function Footer() {
     {
       name: "Instagram",
       icon: <Instagram className="w-5 h-5" />,
-      url: "https://instagram.com/smjsolutions",
+      url: "https://instagram.com/smjsolutions.ltd",
       hoverColor: "hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-600 hover:to-orange-500"
     },
     {
       name: "LinkedIn",
       icon: <Linkedin className="w-5 h-5" />,
-      url: "https://linkedin.com/company/smjsolutions",
+      url: "https://www.linkedin.com/company/smjsols/posts/?feedView=all",
       hoverColor: "hover:bg-blue-700"
     },
     {

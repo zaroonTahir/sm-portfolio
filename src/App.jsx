@@ -9,6 +9,7 @@ import ServiceDetail from "./components/ServiceDetail";
 import PortfolioDetail from "./components/PortfolioDetail";
 import AllProjects from "./components/AllProjects";
 import TermsAndConditions from "./components/TermsandCondition";
+import SEOServicesComponent from "./components/SeoServices";
 
 // Professional Loader Component
 const Loader = () => {
@@ -156,6 +157,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+           <Route path="/seo" element={<SEOServicesComponent />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
           <Route path="/portfolio" element={<AllProjects />} />

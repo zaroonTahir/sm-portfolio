@@ -29,6 +29,13 @@ export default function Navbar() {
     setIsMenuOpen(false);
   };
 
+    const handleSeoClick = (e) => {
+    e.preventDefault();
+    navigate("/seo");
+    // window.scrollTo(0, 0);
+    setIsMenuOpen(false);
+  };
+
   const handleHomeClick = (e) => {
     e.preventDefault();
     navigate("/");
@@ -71,6 +78,7 @@ export default function Navbar() {
     { label: "Services", onClick: handleServicesClick },
     { label: "Portfolio", onClick: handlePortfolioClick },
     { label: "About", onClick: handleAboutClick },
+      { label: "SEO Services", onClick: handleSeoClick },
     { label: "Contact", onClick: handleContactClick },
   ];
 

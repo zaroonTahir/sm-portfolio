@@ -158,7 +158,8 @@ export default function PortfolioDetail() {
       ],
       gallery: [lms1, lms2],
     },
-    "dynamics-group-services": {
+    
+     "dynamics-group-services": {
       title: "Dynamic's Group Services",
       category: "Websites",
       heroImage:
@@ -184,6 +185,35 @@ export default function PortfolioDetail() {
         "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600",
       ],
     },
+    "diamond-trim-pk": {
+      title: "Diamond Trim PK",
+      category: "Websites",
+      heroImage:
+        "https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      overview:
+        "Diamond Trim PK is a comprehensive ERP salon management system designed for modern beauty salons and spas in Pakistan. The platform streamlines salon operations including appointment scheduling, customer management, inventory tracking, staff management, billing, and analytics - all in one elegant solution.",
+      challenge:
+        "Salon owners struggled with managing appointments, tracking inventory, handling multiple staff schedules, and maintaining customer records across different systems. They needed an integrated solution that could handle all aspects of salon operations while being easy to use for both staff and customers.",
+      solution:
+        "Developed a full-featured ERP system with an intuitive dashboard for salon managers, online booking portal for customers, mobile-responsive design for on-the-go access, automated appointment reminders, inventory alerts, staff performance tracking, and comprehensive reporting. Integrated payment processing and customer loyalty programs to boost business growth.",
+      technologies: [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "TailwindCSS",
+        "Payment Gateway",
+        "SMS API",
+        "Real-time Scheduling",
+      ],
+      gallery: [
+        "https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/3992869/pexels-photo-3992869.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/3997379/pexels-photo-3997379.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/3993212/pexels-photo-3993212.jpeg?auto=compress&cs=tinysrgb&w=600",
+      ],
+      link: "https://diamondtrimpk.com/",
+    },
+  
   };
 
   const project = projectsData[projectSlug];

@@ -82,7 +82,7 @@ export default function AllProjects() {
       color: "from-pink-500 to-rose-500",
       description: "Engineering for a Sustainable Future",
     },
-    {
+      {
       title: "Dynamic's Group Services",
       category: "Websites",
       image:
@@ -91,6 +91,17 @@ export default function AllProjects() {
       color: "from-slate-500 to-gray-600",
       description: "Professional business services and consulting solutions",
     },
+  {
+      title: "Diamond Trim PK",
+      category: "Web Apps",
+      image:
+        "https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=800",
+      slug: "diamond-trim-pk",
+      color: "from-violet-500 to-purple-600",
+      description: "Complete ERP salon management system with scheduling and inventory",
+      link: "https://diamondtrimpk.com/",
+    },
+  
   ];
 
   const filteredItems =
