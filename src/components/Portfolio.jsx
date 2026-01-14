@@ -19,6 +19,8 @@ export default function Portfolio() {
     "AI",
     "Automation",
     "Web Apps",
+    "SEO",
+    "Digital marketing & CRM"
   ];
 
   const portfolioItems = [

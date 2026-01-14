@@ -19,6 +19,8 @@ export default function AllProjects() {
     "AI",
     "Automation",
     "Web Apps",
+    "SEO",
+    "Digital marketing & CRM"
   ];
 
   const portfolioItems = [
