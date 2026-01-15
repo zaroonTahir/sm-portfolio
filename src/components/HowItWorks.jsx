@@ -1,67 +1,76 @@
 import React from "react";
-import { ChevronRight } from "lucide-react";
+import {
+  ClipboardList,
+  Map,
+  Palette,
+  Settings,
+  CheckCircle,
+  Rocket,
+  MessageCircle,
+  ShieldCheck,
+  Clock
+} from "lucide-react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 
 export default function HowItWorks() {
   const [ref, isVisible] = useScrollAnimation({ once: true });
 
   const steps = [
-    {
-      number: "01",
-      title: "Requirement Analysis",
-      desc: "We understand your vision, goals, and specific business challenges to lay a strong foundation.",
-      icon: "📋",
-    },
-    {
-      number: "02",
-      title: "Planning",
-      desc: "Create a detailed roadmap outlining the solution architecture and project timeline.",
-      icon: "🗺️",
-    },
-    {
-      number: "03",
-      title: "Design",
-      desc: "Design user-friendly interfaces and scalable system architecture for optimal performance.",
-      icon: "🎨",
-    },
-    {
-      number: "04",
-      title: "Development",
-      desc: "Build robust, secure systems using cutting-edge technologies and best practices.",
-      icon: "⚙️",
-    },
-    {
-      number: "05",
-      title: "QA & Testing",
-      desc: "Rigorous testing of functionality, performance, and user experience to ensure quality.",
-      icon: "✓",
-    },
-    {
-      number: "06",
-      title: "Launch & Support",
-      desc: "Smooth deployment and ongoing support to ensure your success beyond launch.",
-      icon: "🚀",
-    },
-  ];
+  {
+    number: "01",
+    title: "Requirement Analysis",
+    desc: "We understand your vision, goals, and specific business challenges to lay a strong foundation.",
+    icon: ClipboardList,
+  },
+  {
+    number: "02",
+    title: "Planning",
+    desc: "Create a detailed roadmap outlining the solution architecture and project timeline.",
+    icon: Map,
+  },
+  {
+    number: "03",
+    title: "Design",
+    desc: "Design user-friendly interfaces and scalable system architecture for optimal performance.",
+    icon: Palette,
+  },
+  {
+    number: "04",
+    title: "Development",
+    desc: "Build robust, secure systems using cutting-edge technologies and best practices.",
+    icon: Settings,
+  },
+  {
+    number: "05",
+    title: "QA & Testing",
+    desc: "Rigorous testing of functionality, performance, and user experience to ensure quality.",
+    icon: CheckCircle,
+  },
+  {
+    number: "06",
+    title: "Launch & Support",
+    desc: "Smooth deployment and ongoing support to ensure your success beyond launch.",
+    icon: Rocket,
+  },
+];
 
   const benefits = [
-    {
-      title: "Transparent Communication",
-      desc: "Regular updates and clear communication throughout every phase of your project.",
-      icon: "💬",
-    },
-    {
-      title: "Quality Assurance",
-      desc: "Rigorous testing and quality checks at every stage to ensure perfection.",
-      icon: "✅",
-    },
-    {
-      title: "On-Time Delivery",
-      desc: "We respect your timeline and deliver projects on schedule, every time.",
-      icon: "⏱️",
-    },
-  ];
-
+  {
+    title: "Transparent Communication",
+    desc: "Regular updates and clear communication throughout every phase of your project.",
+    icon: MessageCircle,
+  },
+  {
+    title: "Quality Assurance",
+    desc: "Rigorous testing and quality checks at every stage to ensure perfection.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "On-Time Delivery",
+    desc: "We respect your timeline and deliver projects on schedule, every time.",
+    icon: Clock,
+  },
+];
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/30 relative overflow-hidden">
       {/* Background Elements */}
@@ -155,7 +164,8 @@ function ProcessStep({ step, index, isVisible, totalSteps }) {
             filter: isHovered ? 'brightness(1.2)' : 'brightness(1)'
           }}
         >
-          {step.icon}
+          <step.icon className="w-12 h-12 text-cyan-400 group-hover:text-cyan-300 transition-all duration-500" />
+
         </div>
 
         {/* Title */}
@@ -226,7 +236,7 @@ function BenefitCard({ benefit, index, isVisible }) {
             : 'linear-gradient(135deg, rgba(34, 211, 238, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%)'
         }}
       >
-        {benefit.icon}
+       <benefit.icon className="w-6 h-6 text-cyan-400" />
       </div>
       <h4
         className="text-lg font-bold mb-2 transition-all duration-500"

@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
-import { Search, TrendingUp, Link, MapPin, ShoppingCart, FileText, CheckCircle, ArrowRight, BarChart3, Zap, Award, Users } from 'lucide-react';
+import { Search, TrendingUp, Link, MapPin, ShoppingCart, FileText, CheckCircle, ArrowRight, BarChart3, Zap, Award, Users, Mail, Phone, Building } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
+// Initialize EmailJS with your public key
+emailjs.init('udznJym6zm12-dR5l');
 
 export default function SEOServicesComponent() {
   const [activeService, setActiveService] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
+  const [showAuditForm, setShowAuditForm] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    website: '',
+    company: ''
+  });
 
   const services = [
     {
@@ -80,11 +94,266 @@ export default function SEOServicesComponent() {
     { icon: <BarChart3 />, value: "#1", label: "Rankings Achieved" }
   ];
 
+  const handleFormChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleFormSubmit = async () => {
+    // Validation
+    if (!formData.website.trim()) {
+      alert('Please enter your website URL');
+      return;
+    }
+    
+    if (!formData.name.trim()) {
+      alert('Please enter your name');
+      return;
+    }
+    
+    if (!formData.email.trim()) {
+      alert('Please enter your email');
+      return;
+    }
+
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+    
+    setLoading(true);
+    
+    try {
+      // Send email using EmailJS
+      const response = await emailjs.send(
+        'service_2thmr8d', // Your EmailJS service ID
+        'template_k4lggba', // Your EmailJS template ID
+        {
+          to_email: 'info@smjsols.com',
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone || 'Not provided',
+          website: formData.website,
+          company: formData.company || 'Not provided',
+          message: `SEO Audit Request for ${formData.website}`,
+          submitted_at: new Date().toLocaleString()
+        }
+      );
+
+      if (response.status === 200) {
+        setFormSubmitted(true);
+        
+        // Reset form and close modal after 3 seconds
+        setTimeout(() => {
+          setShowAuditForm(false);
+          setFormSubmitted(false);
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            website: '',
+            company: ''
+          });
+        }, 3000);
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Failed to send request. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-slate-950 text-white">
+      {/* Audit Form Modal */}
+      {showAuditForm && (
+       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-16 overflow-y-auto">
+          <div className="bg-slate-900 rounded-2xl max-w-2xl w-full border border-slate-800 my-8">
+            <div className="p-6 md:p-8">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-2">Request Free SEO Audit</h2>
+                  <p className="text-slate-400 text-sm md:text-base">Submit your details and we'll respond within 2 hours with your comprehensive SEO audit</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setShowAuditForm(false);
+                    setFormSubmitted(false);
+                  }}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {!formSubmitted ? (
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-semibold mb-2 text-white">Website URL *</label>
+                    <input
+                      type="url"
+                      name="website"
+                      required
+                      value={formData.website}
+                      onChange={handleFormChange}
+                      placeholder="https://yourwebsite.com"
+                      className="w-full bg-slate-800/80 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors text-white placeholder-slate-500"
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-semibold mb-2 text-white">Full Name *</label>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        value={formData.name}
+                        onChange={handleFormChange}
+                        placeholder="John Doe"
+                        className="w-full bg-slate-800/80 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors text-white placeholder-slate-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-2 text-white">Email Address *</label>
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleFormChange}
+                        placeholder="john@example.com"
+                        className="w-full bg-slate-800/80 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors text-white placeholder-slate-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-semibold mb-2 text-white">Phone Number</label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleFormChange}
+                        placeholder="+1 (555) 000-0000"
+                        className="w-full bg-slate-800/80 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors text-white placeholder-slate-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-2 text-white">Company Name</label>
+                      <input
+                        type="text"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleFormChange}
+                        placeholder="Your Company"
+                        className="w-full bg-slate-800/80 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors text-white placeholder-slate-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+                    <h3 className="font-semibold mb-3 flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-cyan-400" />
+                      What You'll Receive:
+                    </h3>
+                    <ul className="space-y-2 text-sm text-slate-300">
+                      <li className="flex items-start gap-2">
+                        <span className="text-cyan-400">•</span>
+                        <span>Comprehensive technical SEO analysis</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-cyan-400">•</span>
+                        <span>Performance and speed optimization report</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-cyan-400">•</span>
+                        <span>Mobile responsiveness evaluation</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-cyan-400">•</span>
+                        <span>Security and HTTPS validation</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-cyan-400">•</span>
+                        <span>Actionable recommendations to improve rankings</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-cyan-400">•</span>
+                        <span><strong>Response within 2 hours via email</strong></span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setShowAuditForm(false)}
+                      className="flex-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-6 py-3 rounded-lg font-semibold transition-all"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleFormSubmit}
+                      disabled={loading}
+                      className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/50 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {loading ? 'Sending...' : 'Request Free Audit'}
+                    </button>
+                  </div>
+
+                  <p className="text-center text-sm text-slate-400">
+                    No credit card required • 100% Free • Detailed report via email in 2 hours
+                  </p>
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle className="w-12 h-12 text-green-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">Request Submitted!</h3>
+                  <p className="text-slate-400 mb-4">Thank you for your interest. We've received your request.</p>
+                  <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 max-w-md mx-auto mb-6">
+                    <p className="text-sm text-slate-300">
+                      <Mail className="w-4 h-4 inline mr-2 text-cyan-400" />
+                      Check your email (<strong>{formData.email}</strong>) within the next <strong>2 hours</strong> for your comprehensive SEO audit report.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setShowAuditForm(false);
+                      setFormSubmitted(false);
+                      setFormData({
+                        name: '',
+                        email: '',
+                        phone: '',
+                        website: '',
+                        company: ''
+                      });
+                    }}
+                    className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/50 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-slate-900 text-white py-20 px-6">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-blue-900/80 to-slate-900/90"></div>
+      <section className="relative overflow-hidden bg-slate-950 text-white py-20 px-6">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-cyan-900/20 to-slate-950/90"></div>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
@@ -105,13 +374,19 @@ export default function SEOServicesComponent() {
               Increase organic traffic, rankings, and revenue with data-driven SEO strategies
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/50 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105">
+              <button
+                onClick={() => setShowAuditForm(true)}
+                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/50 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105"
+              >
                 Get Free SEO Audit
               </button>
-              <button className="border-2 border-slate-700 hover:border-cyan-500 hover:bg-slate-800/50 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all">
+              {/* <button className="border-2 border-slate-700 hover:border-cyan-500 hover:bg-slate-800/50 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all">
                 View Our Work
-              </button>
+              </button> */}
             </div>
+            <p className="mt-4 text-cyan-100 text-sm">
+              💌 Get your detailed audit report via email within 2 hours
+            </p>
           </div>
 
           {/* Stats */}
@@ -130,11 +405,11 @@ export default function SEOServicesComponent() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 bg-slate-950">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Our SEO Services</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4">Our SEO Services</h2>
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
               Comprehensive SEO solutions tailored to your business needs
             </p>
           </div>
@@ -143,7 +418,7 @@ export default function SEOServicesComponent() {
             {services.map((service, idx) => (
               <div
                 key={idx}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer border border-slate-200 hover:border-cyan-400 relative overflow-hidden"
+                className="group bg-slate-900/50 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 cursor-pointer border border-slate-800 hover:border-cyan-500/50 relative overflow-hidden"
                 onMouseEnter={() => setActiveService(idx)}
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity`}></div>
@@ -152,23 +427,23 @@ export default function SEOServicesComponent() {
                   {service.icon}
                 </div>
 
-                <h3 className="text-2xl font-bold text-slate-900 mb-3">
+                <h3 className="text-2xl font-bold text-white mb-3">
                   {service.title}
                 </h3>
-                <p className="text-slate-600 mb-6">
+                <p className="text-slate-400 mb-6">
                   {service.description}
                 </p>
 
                 <ul className="space-y-3 mb-6">
                   {service.features.map((feature, fidx) => (
-                    <li key={fidx} className="flex items-start text-slate-700">
+                    <li key={fidx} className="flex items-start text-slate-300">
                       <CheckCircle className="w-5 h-5 text-cyan-500 mr-2 mt-0.5 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
 
-                <button className="flex items-center text-cyan-600 hover:text-blue-600 font-semibold transition-colors group">
+                <button className="flex items-center text-cyan-400 hover:text-cyan-300 font-semibold transition-colors group">
                   Learn More
                   <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform" />
                 </button>
@@ -179,7 +454,7 @@ export default function SEOServicesComponent() {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 px-6 bg-slate-900">
+      <section className="py-20 px-6 bg-slate-900/30">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">Our Process</h2>
@@ -241,11 +516,11 @@ export default function SEOServicesComponent() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-slate-950">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Why Choose Us</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4">Why Choose Us</h2>
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
               Partner with SEO experts who deliver measurable results
             </p>
           </div>
@@ -257,12 +532,12 @@ export default function SEOServicesComponent() {
               { title: "Transparent Reporting", desc: "Monthly detailed reports showing exactly what we've done", icon: <FileText className="w-8 h-8" /> },
               { title: "Dedicated Support", desc: "Your own account manager available whenever you need", icon: <Users className="w-8 h-8" /> }
             ].map((item, idx) => (
-              <div key={idx} className="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:border-cyan-400 transition-all hover:shadow-lg">
-                <div className="text-cyan-600 mb-4">
+              <div key={idx} className="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-slate-800 hover:border-cyan-500/50 transition-all hover:shadow-lg hover:shadow-cyan-500/20">
+                <div className="text-cyan-400 mb-4">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
-                <p className="text-slate-600 text-sm">{item.desc}</p>
+                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                <p className="text-slate-400 text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -285,12 +560,15 @@ export default function SEOServicesComponent() {
           <p className="text-xl mb-8 text-cyan-100">
             Get a free SEO audit and discover how we can grow your organic traffic
           </p>
-          <button className="bg-white text-blue-600 hover:bg-slate-100 px-10 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-xl inline-flex items-center gap-2 group">
+          <button
+            onClick={() => setShowAuditForm(true)}
+            className="bg-white text-blue-600 hover:bg-slate-100 px-10 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-xl inline-flex items-center gap-2 group"
+          >
             Get Your Free Audit Now
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
           <p className="mt-6 text-cyan-100 text-sm">
-            No credit card required • Results in 48 hours • Completely free
+            No credit card required • Detailed report via email in 2 hours • Completely free
           </p>
         </div>
       </section>
