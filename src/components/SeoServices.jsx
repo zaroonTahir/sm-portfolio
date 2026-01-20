@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Search, TrendingUp, Link, MapPin, ShoppingCart, FileText, CheckCircle, ArrowRight, BarChart3, Zap, Award, Users, Mail, Phone, Building } from 'lucide-react';
+import { Search, TrendingUp, Link,Check, MapPin, ShoppingCart, FileText, CheckCircle, ArrowRight, BarChart3, Zap, Award, Users, Mail, Phone, Building } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 // Initialize EmailJS with your public key
 emailjs.init('udznJym6zm12-dR5l');
@@ -170,6 +172,8 @@ export default function SEOServicesComponent() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
+      <Navbar />
+      
       {/* Audit Form Modal */}
       {showAuditForm && (
        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-16 overflow-y-auto">
@@ -185,7 +189,7 @@ export default function SEOServicesComponent() {
                     setShowAuditForm(false);
                     setFormSubmitted(false);
                   }}
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-slate-400 hover:text-white transition-colors cursor-pointer"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -297,7 +301,7 @@ export default function SEOServicesComponent() {
                     <button
                       type="button"
                       onClick={() => setShowAuditForm(false)}
-                      className="flex-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-6 py-3 rounded-lg font-semibold transition-all"
+                      className="flex-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-6 py-3 rounded-lg font-semibold transition-all cursor-pointer"
                     >
                       Cancel
                     </button>
@@ -305,7 +309,7 @@ export default function SEOServicesComponent() {
                       type="button"
                       onClick={handleFormSubmit}
                       disabled={loading}
-                      className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/50 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/50 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                     >
                       {loading ? 'Sending...' : 'Request Free Audit'}
                     </button>
@@ -340,7 +344,7 @@ export default function SEOServicesComponent() {
                         company: ''
                       });
                     }}
-                    className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/50 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+                    className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/50 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 cursor-pointer"
                   >
                     Close
                   </button>
@@ -376,13 +380,10 @@ export default function SEOServicesComponent() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={() => setShowAuditForm(true)}
-                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/50 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105"
+                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/50 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 cursor-pointer"
               >
                 Get Free SEO Audit
               </button>
-              {/* <button className="border-2 border-slate-700 hover:border-cyan-500 hover:bg-slate-800/50 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all">
-                View Our Work
-              </button> */}
             </div>
             <p className="mt-4 text-cyan-100 text-sm">
               💌 Get your detailed audit report via email within 2 hours
@@ -443,7 +444,7 @@ export default function SEOServicesComponent() {
                   ))}
                 </ul>
 
-                <button className="flex items-center text-cyan-400 hover:text-cyan-300 font-semibold transition-colors group">
+                <button className="flex items-center text-cyan-400 hover:text-cyan-300 font-semibold transition-colors group cursor-pointer">
                   Learn More
                   <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform" />
                 </button>
@@ -453,67 +454,101 @@ export default function SEOServicesComponent() {
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-20 px-6 bg-slate-900/30">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Our Process</h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-              A proven 4-step methodology to SEO success
+{/* Process Section */}
+<section className="py-20 px-6 bg-slate-900/30">
+  <div className="max-w-6xl mx-auto">
+    {/* Header */}
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-bold text-white mb-4">Our Process</h2>
+      <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+        A proven 4-step methodology to SEO success
+      </p>
+    </div>
+
+    {/* Desktop Timeline */}
+    <div className="hidden lg:block relative mb-16">
+      <div className="absolute top-12 left-0 right-0 h-1 bg-slate-700">
+        <div
+          className="h-full bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-500"
+          style={{ width: `${(activeStep / (process.length - 1)) * 100}%` }}
+        />
+      </div>
+
+      <div className="grid grid-cols-4 gap-8 relative">
+        {process.map((step, idx) => (
+          <div
+            key={idx}
+            onMouseEnter={() => setActiveStep(idx)}
+            className={`bg-slate-800 rounded-xl p-6 border-2 transition-all cursor-pointer ${
+              activeStep === idx
+                ? "border-cyan-500 shadow-xl shadow-cyan-500/20"
+                : "border-slate-700 hover:border-cyan-600"
+            }`}
+          >
+            <div
+              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold mb-4 ${
+                activeStep === idx
+                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white"
+                  : "bg-slate-700 text-white"
+              }`}
+            >
+              {idx + 1}
+            </div>
+
+            <h3 className="text-lg font-bold text-white mb-2">
+              {step.title}
+            </h3>
+            <p className="text-slate-400 text-sm mb-4">
+              {step.description}
             </p>
-          </div>
 
-          <div className="relative">
-            {/* Progress Line */}
-            <div className="hidden md:block absolute top-12 left-0 right-0 h-1 bg-slate-700">
-              <div 
-                className="h-full bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-500 shadow-lg shadow-cyan-500/50"
-                style={{ width: `${(activeStep / (process.length - 1)) * 100}%` }}
-              ></div>
-            </div>
-
-            <div className="grid md:grid-cols-4 gap-8 relative">
-              {process.map((step, idx) => (
-                <div
-                  key={idx}
-                  className="relative"
-                  onMouseEnter={() => setActiveStep(idx)}
-                >
-                  <div className={`bg-slate-800 rounded-xl p-6 border-2 transition-all ${
-                    activeStep === idx 
-                      ? 'border-cyan-500 shadow-xl shadow-cyan-500/20' 
-                      : 'border-slate-700 shadow-md hover:border-cyan-600'
-                  }`}>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold mb-4 transition-all ${
-                      activeStep === idx 
-                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/50' 
-                        : 'bg-slate-700'
-                    }`}>
-                      {idx + 1}
-                    </div>
-                    
-                    <h3 className="text-xl font-bold text-white mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-slate-400 mb-4 text-sm">
-                      {step.description}
-                    </p>
-                    
-                    <ul className="space-y-2">
-                      {step.points.map((point, pidx) => (
-                        <li key={pidx} className="text-sm text-slate-300 flex items-start">
-                          <span className="text-cyan-400 mr-2">•</span>
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+            <ul className="space-y-2">
+              {step.points.map((point, pidx) => (
+                <li key={pidx} className="flex items-start gap-2 text-slate-300 text-sm">
+                  <Check className="w-4 h-4 text-cyan-400 mt-0.5" />
+                  {point}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Mobile / Tablet Layout */}
+<div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+  {process.map((step, idx) => (
+    <div
+      key={idx}
+      className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-cyan-500/50 transition-all"
+    >
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold">
+              {idx + 1}
+            </div>
+            <h3 className="text-lg font-bold text-white">
+              {step.title}
+            </h3>
+          </div>
+
+          <p className="text-slate-400 text-sm mb-4">
+            {step.description}
+          </p>
+
+          <ul className="space-y-2">
+            {step.points.map((point, pidx) => (
+              <li key={pidx} className="flex items-start gap-2 text-slate-300 text-sm">
+                <Check className="w-4 h-4 text-cyan-400 mt-0.5" />
+                {point}
+              </li>
+            ))}
+          </ul>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Why Choose Us Section */}
       <section className="py-20 px-6 bg-slate-950">
@@ -562,7 +597,7 @@ export default function SEOServicesComponent() {
           </p>
           <button
             onClick={() => setShowAuditForm(true)}
-            className="bg-white text-blue-600 hover:bg-slate-100 px-10 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-xl inline-flex items-center gap-2 group"
+            className="bg-white text-blue-600 hover:bg-slate-100 px-10 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-xl inline-flex items-center gap-2 group cursor-pointer"
           >
             Get Your Free Audit Now
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -572,6 +607,8 @@ export default function SEOServicesComponent() {
           </p>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }

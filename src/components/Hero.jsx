@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChevronRight, ArrowRight, Zap, Users, Award } from "lucide-react";
 import hero from "../assets/hero1.jpg"
 
@@ -9,6 +10,7 @@ const google = "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_
 const hubspot = "https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg";
 
 export default function Hero() {
+  const navigate = useNavigate();
   const canvasRef = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
@@ -208,7 +210,7 @@ export default function Hero() {
   }, []);
 
   const handleGetConsultation = () => {
-    alert("Navigate to contact page");
+    navigate("/contact");
   };
 
   const handleExploreServices = () => {
@@ -284,7 +286,7 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <button
                 onClick={handleGetConsultation}
-                className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 rounded-lg font-semibold transition-all hover:shadow-lg hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 backdrop-blur-sm border border-cyan-400/20"
+                className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 rounded-lg font-semibold transition-all hover:shadow-lg hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 backdrop-blur-sm border border-cyan-400/20 cursor-pointer"
               >
                 <span className="relative z-10 flex items-center justify-center space-x-2">
                   <span>Get a Free Consultation</span>
@@ -294,7 +296,7 @@ export default function Hero() {
 
               <button
                 onClick={handleExploreServices}
-                className="group border border-cyan-500/50 px-8 py-4 rounded-lg font-semibold hover:bg-cyan-500/10 transition-all backdrop-blur-sm flex items-center justify-center space-x-2 hover:border-cyan-400 active:scale-95"
+                className="group border border-cyan-500/50 px-8 py-4 rounded-lg font-semibold hover:bg-cyan-500/10 transition-all backdrop-blur-sm flex items-center justify-center space-x-2 hover:border-cyan-400 active:scale-95 cursor-pointer"
               >
                 <span>Explore Our Services</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
